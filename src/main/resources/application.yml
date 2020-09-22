@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: local, dev
+
+  #  MySQL
+  datasource:
+    url: jdbc:mysql://localhost:3306/template_app?useSSL=false
+    username: root
+    password: password
