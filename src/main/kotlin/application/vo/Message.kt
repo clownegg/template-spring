@@ -1,5 +1,6 @@
 package application.vo
 
-data class Exception(
+data class Message(
+        val code: Int,
         val message: String
 )

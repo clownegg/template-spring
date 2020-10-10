@@ -1,10 +1,10 @@
 package application.dao
 
 import application.entity.Todo
-import org.seasar.doma.Dao
-import org.seasar.doma.Select
-import org.seasar.doma.Sql
+import org.seasar.doma.*
 import org.seasar.doma.boot.ConfigAutowireable
+import org.seasar.doma.jdbc.Result
+import org.springframework.transaction.annotation.Transactional
 
 @Dao
 @ConfigAutowireable
@@ -14,6 +14,7 @@ interface TodoDao {
         where is_enabled= true and is_deleted = false
     """)
     @Select
+    @Transactional
     fun selectAll(): List<Todo>
 
     @Sql("""
@@ -22,5 +23,17 @@ interface TodoDao {
         and id = /* id */1
     """)
     @Select
+    @Transactional
     fun selectById(id: Int): Todo?
+
+    @Sql("""
+        insert into t_todos (title, done) 
+        values (
+            /* todo.title */'test',
+            /* todo.done */0
+        )
+    """)
+    @Insert
+    @Transactional
+    fun create(todo: Todo): Result<Todo>
 }

@@ -8,8 +8,7 @@ import java.time.LocalDateTime
 data class Todo(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "id")
-        val id: Int,
+        val id: Int? = null,
 
         @Column(name = "title")
         val title: String,
@@ -18,14 +17,14 @@ data class Todo(
         val done: Boolean,
 
         @Column(name = "is_enabled")
-        val isEnabled: Boolean,
+        val isEnabled: Boolean?,
 
         @Column(name = "is_deleted")
-        val isDeleted: Boolean,
+        val isDeleted: Boolean?,
 
         @Column(name = "created_at")
-        val createdAt: LocalDateTime,
+        val createdAt: LocalDateTime?,
 
         @Column(name = "updated_at")
-        val updated_at: LocalDateTime
+        val updated_at: LocalDateTime?
 )

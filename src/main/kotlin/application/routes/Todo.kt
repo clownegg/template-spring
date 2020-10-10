@@ -9,6 +9,7 @@ class TodoRouter(private val todoController: TodoController) {
         ("/todos" and accept(MediaType.APPLICATION_JSON)).nest {
             GET("/", todoController::findAll)
             GET("/{id}", todoController::findById)
+            POST("/", todoController::create)
         }
     }
 }

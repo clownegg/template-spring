@@ -2,12 +2,15 @@ package application.repository
 
 import application.dao.TodoDao
 import application.entity.Todo
-import org.springframework.beans.factory.annotation.Autowired
+import org.seasar.doma.jdbc.Result
 import org.springframework.stereotype.Repository
+import application.vo.TodoVo
 
 @Repository
 class TodoRepository(private val todoDao: TodoDao) {
-    fun findAll(): List<Todo> = todoDao.selectAll()
+    fun findAll() = todoDao.selectAll()
 
-    fun findById(id: Int): Todo? = todoDao.selectById(id)
+    fun findById(id: Int) = todoDao.selectById(id)
+
+    fun create(todo: Todo) = todoDao.create(todo);
 }
