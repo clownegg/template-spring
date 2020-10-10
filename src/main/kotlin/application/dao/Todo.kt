@@ -46,4 +46,12 @@ interface TodoDao {
     @Update
     @Transactional
     fun update(id: Int, todo: Todo): Result<Todo>
+
+    @Sql("""
+        delete from t_todos
+        where id = /* id */0
+    """)
+    @Delete
+    @Transactional
+    fun delete(id: Int): Result<Todo>
 }

@@ -15,4 +15,6 @@ class TodoRepository(private val todoDao: TodoDao) {
     fun create(todo: Todo) = todoDao.create(todo)
 
     fun update(id: Int, todo: Todo) = todoDao.update(id, todo)
+
+    fun delete(id: Int) = todoDao.delete(id)
 }

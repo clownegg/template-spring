@@ -11,6 +11,7 @@ class TodoRouter(private val todoController: TodoController) {
             GET("/{id}", todoController::findById)
             POST("/", todoController::create)
             PUT("/{id}", todoController::update)
+            DELETE("/{id}", todoController::delete)
         }
     }
 }

@@ -63,4 +63,19 @@ class TodoController(private val todoService: TodoService) {
                 )
         }
     }
+
+    fun delete(request: ServerRequest): Mono<ServerResponse> {
+        val id = request.pathVariable("id").toInt()
+
+        val ok = todoService.delete(id)
+
+        return if (ok.count > 0)
+            ServerResponse.ok().body(
+                    Mono.just(Message(code = 200, message = "success"))
+            )
+        else
+            ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    Mono.just(Message(code = 500, message = "some error has appeared"))
+            )
+    }
 }

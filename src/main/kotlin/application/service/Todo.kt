@@ -12,4 +12,6 @@ class TodoService(private val todoRepository: TodoRepository) {
     fun create(todo: Todo) = todoRepository.create(todo)
 
     fun update(id: Int, todo: Todo) = todoRepository.update(id, todo)
+
+    fun delete(id: Int) = todoRepository.delete(id)
 }
