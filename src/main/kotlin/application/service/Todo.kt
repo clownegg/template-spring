@@ -10,4 +10,6 @@ class TodoService(private val todoRepository: TodoRepository) {
     fun findById(id: Int) = todoRepository.findById(id)
 
     fun create(todo: Todo) = todoRepository.create(todo)
+
+    fun update(id: Int, todo: Todo) = todoRepository.update(id, todo)
 }

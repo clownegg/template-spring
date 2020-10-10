@@ -12,5 +12,7 @@ class TodoRepository(private val todoDao: TodoDao) {
 
     fun findById(id: Int) = todoDao.selectById(id)
 
-    fun create(todo: Todo) = todoDao.create(todo);
+    fun create(todo: Todo) = todoDao.create(todo)
+
+    fun update(id: Int, todo: Todo) = todoDao.update(id, todo)
 }

@@ -36,4 +36,14 @@ interface TodoDao {
     @Insert
     @Transactional
     fun create(todo: Todo): Result<Todo>
+
+    @Sql("""
+        update t_todos
+        set title = /* todo.title */'title', done=/* todo.done */0
+        where id = /* id */0
+        and is_enabled = true and is_deleted = false
+    """)
+    @Update
+    @Transactional
+    fun update(id: Int, todo: Todo): Result<Todo>
 }

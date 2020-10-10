@@ -33,11 +33,29 @@ class TodoController(private val todoService: TodoService) {
             val todo = Todo(it.id, it.title, it.done, it.isEnabled, it.isDeleted, it.createdAt, it.updatedAt)
             val ok = todoService.create(todo)
 
-            println(ok)
-
              if (ok.count > 0)
                 ServerResponse.ok().body(
                         Mono.just(Message(code=200, message = "success"))
+                )
+            else
+                ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                        Mono.just(Message(code = 500, message = "some error has appeared"))
+                )
+        }
+    }
+
+    fun update(request: ServerRequest): Mono<ServerResponse> {
+        return request.bodyToMono<TodoVo>().doOnNext {
+            println(it)
+        }.flatMap {
+            val todo = Todo(it.id, it.title, it.done, it.isEnabled, it.isDeleted, it.createdAt, it.updatedAt)
+            val id = request.pathVariable("id").toInt()
+
+            val ok = todoService.update(id, todo);
+
+            if (ok.count > 0)
+                ServerResponse.ok().body(
+                        Mono.just(Message(code = 200, message = "success"))
                 )
             else
                 ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
